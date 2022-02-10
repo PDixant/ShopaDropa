@@ -64,8 +64,9 @@ router.get("/:id", function(req, res, next) {
 });
 
 router.post("/", (req, res) => {
+  console.log(req.body)
   const currentBook = {
-    id: books.length + 1,
+    id: books.length,
     name: req.body.name,
     author: req.body.author,
     year: req.body.year,

@@ -8,7 +8,7 @@ display: flex;
 flex-wrap: wrap;
 Flex-direction: row;
 alignItems: center;
-justify-content:space-around;
+justify-content: left;
 margin: 100px
 `
 

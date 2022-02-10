@@ -1,72 +1,143 @@
 import React , { Component } from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField'
+import TextField from '@mui/material/TextField';
+import Button from "@mui/material/Button";
+import styled from 'styled-components';
+import axios from 'axios';
+import {withRouter} from './../Components/withRouter.js'
+const StyledTextContainer = styled.div`
+display: flex;
+text-align: center;
+flex-direction: row;
+justify-content: center;
+align-content: left;
+border: 2px solid black;
+padding: 60px;
+width: 50%;
+margin: auto;
+`
 
+const StyledTextField = styled(TextField)`
+padding: 10px;
+margin: 10px;
+width: 200px;
+`;
 
 class Create extends Component {
+  state = {
+    name: null,
+    year: null,
+    isdn: null,
+    author: null,
+  };
 
-    render(){
-        return (
-                <div>
-                    <Box
-                        component="form"
-                        sx={{
-                            '& .MuiTextField-root': { m: 1, width: '25ch' },
-                        }}
-                        noValidate
-                        autoComplete="off"
-                    >
-                    <div>
-                        <TextField
-                        required
-                        id="outlined-required"
-                        label="Required"
-                        defaultValue="Hello World"
-                        />
-                        <TextField
-                        disabled
-                        id="outlined-disabled"
-                        label="Disabled"
-                        defaultValue="Hello World"
-                        />
-                        <TextField
-                        id="outlined-password-input"
-                        label="Password"
-                        type="password"
-                        autoComplete="current-password"
-                        />
-                        <TextField
-                        id="outlined-read-only-input"
-                        label="Read Only"
-                        defaultValue="Hello World"
-                        InputProps={{
-                            readOnly: true,
-                        }}
-                        />
-                        <TextField
-                        id="outlined-number"
-                        label="Number"
-                        type="number"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        />
-                        <TextField id="outlined-search" label="Search field" type="search" />
-                        <TextField
-                        id="outlined-helperText"
-                        label="Helper text"
-                        defaultValue="Default Value"
-                        helperText="Some important text"
-                        />
-                    </div>
-                    </Box>
-                </div>
+  handleClick = () => {
+    // let navigate = useNavigate();
+      const {
+          name, year, author, isdn
+      } = this.state
 
-        )    
+      axios.post('/books/', {
+          name: name,
+          year: year,
+          author: author,
+          isbn: isdn,
+      }).then((response) => {
+          console.log(response)
+          this.props.navigate("/")
+      }, (error) => {
+          console.log(error)
+      });
+      console.log(name,year, author, isdn)
+  };
+
+  handleNameChange = (e) => {
+      console.log(e)
+    this.setState({
+      name: e.target.value,
+    });
+  };
+
+  handleAuthorChange = (e) => {
+    this.setState({
+      author: e.target.value,
+    });
+  };
+
+  handleYearChange = (e) => {
+    this.setState({
+      year: e.target.value,
+    });
+  };
+
+  handleIsdnChange = (e) => {
+    this.setState({
+      isdn: e.target.value,
+    });
+  };
+
+  onlyNumberKey = (evt) => {
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
     }
 
-
+  render() {
+      const {
+        handleNameChange,
+        handleAuthorChange,
+        handleYearChange,
+        handleIsdnChange,
+        onlyNumberKey,
+      } = this;
+    return (
+      <div>
+        <StyledTextContainer>
+          <div>
+            <StyledTextField
+              required
+              id="Name"
+              label="name of book"
+              onChange={(e) => handleNameChange(e)}
+            />
+            <StyledTextField
+              required
+              id="Author"
+              label="name of author"
+              onChange={(e) => handleAuthorChange(e)}
+            />
+            <StyledTextField
+              required
+              id="IDSN"
+              label="ISDN"
+              isnumericstring="true"
+              inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+              onKeyUp={(e) => onlyNumberKey(e)}
+              onChange={(e) => handleIsdnChange(e)}
+            />
+            <StyledTextField
+              required
+              id="Year"
+              label="year published"
+              onKeyUp={(e) => onlyNumberKey(e)}
+              inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+              isnumericstring="true"
+              onChange={(e) => handleYearChange(e)}
+            />
+          </div>
+          <Button
+            variant="contained"
+            onClick={() => {
+              this.handleClick();
+            }}
+          >
+            Submit
+          </Button>
+        </StyledTextContainer>
+      </div>
+    );
+  }
 }
 
 
-export default Create;
+export default withRouter(Create);

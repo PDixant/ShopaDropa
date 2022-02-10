@@ -10,6 +10,7 @@ const StyledCard = styled(Card)`
   width: 300px;
   height: 100%;
   border: 2px solid black;
+  margin: 30px;
 `;
 
 const StyledContent = styled(CardContent)`
