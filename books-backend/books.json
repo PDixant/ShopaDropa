@@ -1,0 +1,40 @@
+{
+"books": [
+  {
+    "author": "Chinua Achebe",
+    "isbn": 9780435272463,
+    "name": "Things Fall Apart",
+    "year": 1958
+  },
+  {
+    "author": "Hans Christian Andersen",
+    "isbn": 9780517336328,
+    "name": "Fairy tales",
+    "year": 1836
+  },
+  {
+    "author": "Dante Alighieri",
+    "isbn": 9781532704178,
+    "name": "The Divine Comedy",
+    "year": 1315
+  },
+  {
+    "author": "Unknown",
+    "isbn": 9788483468265,
+    "name": "The Epic Of Gilgamesh",
+    "year": -1700
+  },
+  {
+    "author": "Stephen Mitchell",
+    "isbn": 9780060553418,
+    "name": "The Book Of Job",
+    "year": -600
+  },
+  {
+    "author": "Scheherazade",
+    "isbn":  9780706411157,
+    "name": "One Thousand and One Nights",
+    "year": 1200
+  }
+]
+}
