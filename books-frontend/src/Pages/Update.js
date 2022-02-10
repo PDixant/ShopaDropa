@@ -43,7 +43,6 @@ class Update extends Component {
   handleClick = () => {
     // let navigate = useNavigate();
     const { data } = this.state;
-    console.log(data.name);
     axios
       .put(`/books/${data.id}`, {
         name: data.name,

@@ -13,7 +13,6 @@ class App extends Component {
           <Route path="/" element={<Books />}></Route>
           <Route path="/create-book" element={<Create />}></Route>
           <Route path="/books/:id" element={<Update />}>
-            {/* <Home /> */}
           </Route>
         </Routes>
       </Router>

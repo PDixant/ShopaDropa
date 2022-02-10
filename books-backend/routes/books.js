@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
 const books = [
   {
     id: 1,
@@ -53,13 +52,12 @@ router.get('/', function(req, res, next) {
 });
 
 router.get("/:id", function(req, res, next) {
-  //Line 9
   const currentBook = books.find((c) => c.id === parseInt(req.params.id));
   if (!currentBook) {
     return res.status(404).send("The Book with the given id was not found");
   }
 
-  res.send(currentBook); //Line 10
+  res.send(currentBook);
 });
 
 router.post("/", (req, res) => {

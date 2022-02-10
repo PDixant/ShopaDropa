@@ -46,7 +46,6 @@ class Create extends Component {
       }, (error) => {
           console.log(error)
       });
-      console.log(name,year, author, isdn)
   };
 
   handleNameChange = (e) => {

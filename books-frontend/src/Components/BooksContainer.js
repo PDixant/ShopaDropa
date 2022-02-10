@@ -30,7 +30,6 @@ padding-bottom: 20px;
 
 
 const handleOnDelete = (e) => {
-console.log(e);
 if(window.confirm("are you sure you want to delete this book?")){
   axios
     .delete(`/books/${e}`, {
@@ -38,7 +37,6 @@ if(window.confirm("are you sure you want to delete this book?")){
     })
     .then(
       (res) => {
-        console.log(res);
         window.location.reload();
       },
       (error) => {
