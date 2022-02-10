@@ -4,42 +4,42 @@ var router = express.Router();
 /* GET users listing. */
 const books = [
   {
-    id: 0,
+    id: 1,
     author: "Chinua Achebe",
     isbn: 9780435272463,
     name: "Things Fall Apart",
     year: 1958,
   },
   {
-    id: 1,
+    id: 2,
     author: "Hans Christian Andersen",
     isbn: 9780517336328,
     name: "Fairy tales",
     year: 1836,
   },
   {
-    id: 2,
+    id: 3,
     author: "Dante Alighieri",
     isbn: 9781532704178,
     name: "The Divine Comedy",
     year: 1315,
   },
   {
-    id: 3,
+    id: 4,
     author: "Unknown",
     isbn: 9788483468265,
     name: "The Epic Of Gilgamesh",
     year: -1700,
   },
   {
-    id: 4,
+    id: 5,
     author: "Stephen Mitchell",
     isbn: 9780060553418,
     name: "The Book Of Job",
     year: -600,
   },
   {
-    id: 5,
+    id: 6,
     author: "Scheherazade",
     isbn: 9780706411157,
     name: "One Thousand and One Nights",
@@ -55,7 +55,6 @@ router.get('/', function(req, res, next) {
 router.get("/:id", function(req, res, next) {
   //Line 9
   const currentBook = books.find((c) => c.id === parseInt(req.params.id));
-  console.log(req)
   if (!currentBook) {
     return res.status(404).send("The Book with the given id was not found");
   }
@@ -64,9 +63,10 @@ router.get("/:id", function(req, res, next) {
 });
 
 router.post("/", (req, res) => {
-  console.log(req.body)
+
+  const currentId = books[books.length- 1].id;
   const currentBook = {
-    id: books.length,
+    id: currentId + 1,
     name: req.body.name,
     author: req.body.author,
     year: req.body.year,
@@ -82,10 +82,10 @@ router.put("/:id", (req, res) => {
     return res.status(404).send("The Book with the given id was not found");
   }
   currentBook.name = req.body.name;
-  (currentBook.author = req.body.author),
-    (currentBook.year = req.body.year),
-    (currentBook.isbn = req.body.isbn),
-    res.send(currentBook);
+  currentBook.author = req.body.author;
+  currentBook.year = req.body.year;
+  currentBook.isbn = req.body.isbn;
+  res.send(currentBook);
 });
 
 router.delete("/:id", (req, res) => {
@@ -95,7 +95,6 @@ router.delete("/:id", (req, res) => {
 
   const index = books.indexOf(currentBook);
   books.splice(index, 1);
-
-  response.send(currentBook);
+  res.send(currentBook);
 });
 module.exports = router;

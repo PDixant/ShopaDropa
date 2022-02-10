@@ -31,7 +31,6 @@ class Create extends Component {
   };
 
   handleClick = () => {
-    // let navigate = useNavigate();
       const {
           name, year, author, isdn
       } = this.state
@@ -42,7 +41,6 @@ class Create extends Component {
           author: author,
           isbn: isdn,
       }).then((response) => {
-          console.log(response)
           this.props.navigate("/")
       }, (error) => {
           console.log(error)
@@ -51,7 +49,6 @@ class Create extends Component {
   };
 
   handleNameChange = (e) => {
-      console.log(e)
     this.setState({
       name: e.target.value,
     });

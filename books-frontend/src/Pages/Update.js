@@ -89,7 +89,7 @@ class Update extends Component {
 
   handleIsdnChange = (e) => {
     const { data } = this.state;
-    data.isdn = e.target.value;
+    data.isbn = e.target.value;
     this.setState({
       data,
     });
