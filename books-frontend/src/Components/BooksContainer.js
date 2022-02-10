@@ -31,19 +31,21 @@ padding-bottom: 20px;
 
 const handleOnDelete = (e) => {
 console.log(e);
-axios
-  .delete(`/books/${e}`, {
-    id: e,
-  })
-  .then(
-    (res) => {
-      console.log(res);
-      window.location.reload();
-    },
-    (error) => {
-      console.log(error);
-    }
-  );
+if(window.confirm("are you sure you want to delete this book?")){
+  axios
+    .delete(`/books/${e}`, {
+      id: e,
+    })
+    .then(
+      (res) => {
+        console.log(res);
+        window.location.reload();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+}
 }
 
 function BookContainer(props) {

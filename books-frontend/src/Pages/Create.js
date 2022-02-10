@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import styled from 'styled-components';
 import axios from 'axios';
 import {withRouter} from './../Components/withRouter.js'
+
 const StyledTextContainer = styled.div`
 display: flex;
 text-align: center;
@@ -105,8 +106,8 @@ class Create extends Component {
             />
             <StyledTextField
               required
-              id="IDSN"
-              label="ISDN"
+              id="ISBN"
+              label="ISBN"
               isnumericstring="true"
               inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
               onKeyUp={(e) => onlyNumberKey(e)}
@@ -129,6 +130,14 @@ class Create extends Component {
             }}
           >
             Submit
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => {
+                this.props.navigate("/");
+            }}
+          >
+            Cancel
           </Button>
         </StyledTextContainer>
       </div>
