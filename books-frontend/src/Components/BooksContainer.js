@@ -3,6 +3,8 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import styled from 'styled-components';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const StyledCard = styled(Card)`
 width: 300px;
@@ -26,8 +28,27 @@ bottom: 0;
 padding-bottom: 20px;
 `;
 
-function BookContainer(props) {
 
+const handleOnDelete = (e) => {
+console.log(e);
+axios
+  .delete(`/books/${e}`, {
+    id: e,
+  })
+  .then(
+    (res) => {
+      console.log(res);
+      window.location.reload();
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+}
+
+function BookContainer(props) {
+    let cid = props.id;
+    let navigate = useNavigate();
     return (
       <StyledCard>
         <StyledContent>
@@ -43,8 +64,12 @@ function BookContainer(props) {
           <br />
         </StyledContent>
         <ButtonContainer>
-          <Button variant="contained">Delete </Button>
-          <Button variant="contained">Update </Button>
+          <Button onClick={() => handleOnDelete(cid)} variant="contained">
+            Delete
+          </Button>
+          <Button onClick={() => navigate(`/books/${cid}`)} variant="contained">
+            Update{" "}
+          </Button>
         </ButtonContainer>
       </StyledCard>
     );
