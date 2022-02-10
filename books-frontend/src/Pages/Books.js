@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from "axios";
 import BookContainer from './../Components/BooksContainer.js'
 import styled from 'styled-components'
+import CreateBook from './../Components/CreateBook.js'
 const BookShelf = styled.div`
 display: flex;
 flex-wrap: wrap;
@@ -16,8 +17,6 @@ class Books extends Component {
     data: null,
   };
 
-
-
   componentDidMount() {
     axios.get(`/books/`).then((res) => {
       const data = res.data;
@@ -26,32 +25,28 @@ class Books extends Component {
   }
 
   render() {
-      const {
-          data
-      } = this.state
-      console.log("object is here", data)
+    const { data } = this.state;
     return (
-    
-    <div>
-    <BookShelf>
-    {data && (
-        data.map( e => {
-            return(
-            <BookContainer
-              key={e.id}
-              name={e.name}
-              author={e.author}
-              year={e.year}
-              isbn={e.isbn}
-              id={e.id}
-            />
-        )})
-    )}
-    </BookShelf>
-    </div>
-    
-    )
-}
+      <div>
+        <BookShelf>
+        <CreateBook to="create-book" />
+          {data &&
+            data.map((e) => {
+              return (
+                <BookContainer
+                  key={e.id}
+                  name={e.name}
+                  author={e.author}
+                  year={e.year}
+                  isbn={e.isbn}
+                  id={e.id}
+                />
+              );
+            })}
+        </BookShelf>
+      </div>
+    );
+  }
 }
 
 export default Books;
